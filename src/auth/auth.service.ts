@@ -4,18 +4,19 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UserService } from '../user/user.service';
-import { JwtService } from '@nestjs/jwt';
+import {UserService} from '../user/user.service';
+import {JwtService} from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
-import { UserCredentialDto } from '../user/dto/user-credential.dto';
-import { User } from '../user/entities/user.entity';
+import {UserCredentialDto} from '../user/dto/user-credential.dto';
+import {User} from '../user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
-  ) {}
+  ) {
+  }
 
   async login(userDto: UserCredentialDto) {
     const user = await this.validateUser(userDto);
@@ -41,7 +42,9 @@ export class AuthService {
       password: hashPassword,
     });
 
-    return 'Користувач зареєстрованний.';
+    return {
+      "message": "Користувач зареєстрований.",
+    };
   }
 
   async generateToken(user: User) {
