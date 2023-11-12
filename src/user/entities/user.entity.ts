@@ -4,8 +4,10 @@ import {
   Column,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 import { Role } from '../../role/entities/role.entity';
+import { Vacancy } from '../../vacancy/entities/vacancy.entity';
 
 @Entity()
 export class User {
@@ -17,6 +19,9 @@ export class User {
 
   @Column()
   password: string;
+
+  @OneToMany(() => Vacancy, (vacancy) => vacancy.user)
+  vacancy: Vacancy[];
 
   @ManyToMany(() => Role)
   @JoinTable()
