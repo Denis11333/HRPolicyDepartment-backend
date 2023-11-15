@@ -15,6 +15,8 @@ export class VacancyAnswer {
   @Column()
   fullName: string;
 
-  @ManyToOne(() => Vacancy, (vacancy) => vacancy.answers)
+  @ManyToOne(() => Vacancy, (vacancy) => vacancy.answers, {
+    onDelete: 'CASCADE',
+  })
   vacancy: Vacancy;
 }
