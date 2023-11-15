@@ -22,6 +22,8 @@ export class Vacancy {
   @ManyToOne(() => User, (user) => user.vacancy)
   user: User;
 
-  @OneToMany(() => VacancyAnswer, (vacancyAnswer) => vacancyAnswer.vacancy)
+  @OneToMany(() => VacancyAnswer, (vacancyAnswer) => vacancyAnswer.vacancy, {
+    cascade: ['remove'],
+  })
   answers: VacancyAnswer[];
 }
